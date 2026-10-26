@@ -15,10 +15,10 @@ int main(void)
         int len;
         scanf("%d\n",&len);
         char str[len+1];
-        fgets(str, sizeof(str), stdin);
+        scanf("%s", str);
         int x=1;
-        for (int j=0;j<len/2+1;j++){
-            if(str[j]!=str[len-j]){
+        for (int j=0;j<len/2;j++){
+            if(str[j]!=str[len-1-j]){
                 x=0;
                 break;
             } 
