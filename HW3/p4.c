@@ -21,7 +21,7 @@ struct Record {
     int line_no;            /* line number of the malloc/calloc call */
     const char *file_name;  /* file in which the call happens */
 };
-
+struct Record records[MAX_RECORDS];
 void *recorded_malloc(size_t size, int line, const char *file) {
   void *ptr = malloc(size);
   if (ptr != NULL) {
