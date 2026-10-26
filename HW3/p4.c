@@ -37,7 +37,6 @@ void *recorded_malloc(size_t size, int line, const char *file) {
   }
   return ptr;
 }
-struct Record records[MAX_RECORDS];
 void *recorded_calloc(size_t cnt, size_t each_size, int line, const char *file) {
   void *ptr = calloc(cnt, each_size);
   if (ptr != NULL) {
@@ -70,7 +69,23 @@ void recorded_free(void *ptr, int line, const char *file) {
     printf("Invalid free in file %s, line %d\n", file, line);  
     return;
 }
+void check_leak(void) __attribute__((destructor));
 
+void check_leak(void) {
+    size_t total = 0;
+    int count = 0;
+
+    printf("Summary:\n");
+    for (int i = 0; i < MAX_RECORDS; ++i) {
+        if (records[i].ptr != NULL) {
+            printf("%zu bytes memory not freed (allocated in file %s, line %d)\n",
+                   records[i].size, records[i].file_name, records[i].line_no);
+            total += records[i].size;
+            ++count;
+        }
+    }
+    printf("%d allocation records not freed (%zu bytes in total).\n", count, total);
+}
 
 #define malloc(SIZE) recorded_malloc(SIZE, __LINE__, __FILE__)
 #define calloc(CNT, EACH_SIZE) recorded_calloc(CNT, EACH_SIZE, __LINE__, __FILE__)
