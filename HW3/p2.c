@@ -13,12 +13,12 @@ int main(void)
     scanf("%d",&n);
     for (int i=0;i<n;i++){
         int len;
-        scanf("%d\n",len);
+        scanf("%d\n",&len);
         char str[len+1];
         fgets(str, sizeof(str), stdin);
         int x=1;
         for (int j=0;j<len/2+1;j++){
-            if(str[j]==str[len-j]){
+            if(str[j]!=str[len-j]){
                 x=0;
                 break;
             } 
