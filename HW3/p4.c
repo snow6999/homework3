@@ -76,6 +76,7 @@ void check_leak(void) {
     int count = 0;
 
     printf("Summary:\n");
+
     for (int i = 0; i < MAX_RECORDS; ++i) {
         if (records[i].ptr != NULL) {
             printf("%zu bytes memory not freed (allocated in file %s, line %d)\n",
@@ -84,7 +85,12 @@ void check_leak(void) {
             ++count;
         }
     }
-    printf("%d allocation records not freed (%zu bytes in total).\n", count, total);
+
+    if (count == 0) {
+        printf("All allocations have been freed.\n");
+    } else {
+        printf("%d allocation records not freed (%zu bytes in total).\n", count, total);                         
+    }
 }
 
 #define malloc(SIZE) recorded_malloc(SIZE, __LINE__, __FILE__)
