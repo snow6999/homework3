@@ -13,7 +13,7 @@ int hw3_isupper(int ch)  { return ch>='A'&&ch<='Z'; }
 int hw3_isalpha(int ch)  { return ch>='A'&&ch<='Z'||ch>='a'&&ch<='z'; }
 int hw3_isdigit(int ch)  { return ch>='0'&&ch<='9'; }
 int hw3_tolower(int ch)  { return (ch >= 'A' && ch <= 'Z') ? ch - 'A' + 'a' : ch; }
-int hw3_toupper(int ch)  { return (ch >= 'a' && ch <= 'z') ?ch - 'a' + 'A' ; }
+int hw3_toupper(int ch)  { return (ch >= 'a' && ch <= 'z') ?ch - 'a' + 'A': ch; }
 
 size_t hw3_strlen(const char *str){
     size_t n=0;
